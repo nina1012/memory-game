@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif; }
+
+body {
+  box-sizing: border-box;
+  text-align: center; }
+
+h1 {
+  font-size: 5rem;
+  color: #614385;
+  margin: 2rem 0; }
+
+.cards {
+  border: 1px solid green;
+  width: 80rem;
+  height: 90rem;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 5px;
+  margin: 2rem auto; }
+
+.card {
+  width: 20rem;
+  height: 28rem;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  border-radius: 5px; }
+  .card__box {
+    width: 200px;
+    height: 100%;
+    perspective: 1000px;
+    position: relative; }
+  .card__front, .card__back {
+    position: absolute;
+    backface-visibility: hidden;
+    border: 5px solid black; }
+  .card__front {
+    background: linear-gradient(to right, #516395, #614385);
+    transform: rotateY(0deg);
+    z-index: 2; }
+  .card__back {
+    background-color: wheat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg); }
+
+.card.visible > .card__box > .card__front {
+  transform: rotateY(180deg); }
+
+.card.visible > .card__box > .card__back {
+  transform: rotateY(0deg); }

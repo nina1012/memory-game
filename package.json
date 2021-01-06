@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "compile:sass": "node-sass css/styles.css sass/main.scss -w"
+    "compile:sass": "node-sass sass/main.scss css/styles.css -w"
   },
   "repository": {
     "type": "git",
