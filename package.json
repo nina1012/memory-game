@@ -1,0 +1,22 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "compile:sass": "node-sass css/styles.css sass/main.scss -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nina1012/memory-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nina1012/memory-game/issues"
+  },
+  "homepage": "https://github.com/nina1012/memory-game#readme",
+  "devDependencies": {
+    "node-sass": "^5.0.0"
+  }
+}
