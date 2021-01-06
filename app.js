@@ -26,9 +26,13 @@ document.addEventListener('DOMContentLoaded', e => {
     // timer should start to count
     timer.textContent = 0;
     matchArray = [];
+    startButton.display = 'inline-block';
     setTimer();
     // make sure that grid is empty
-    // grid.innerHTML = '';
+    hideCardImage();
+  }
+  function hideCardImage() {
+    cards.forEach(card => card.classList.remove('visible'));
   }
 
   function setTimer() {
@@ -45,16 +49,28 @@ document.addEventListener('DOMContentLoaded', e => {
     if (matchArray.length < 2) {
       matchArray.push(card);
     } else if (matchArray.length == 2) {
+      setTimeout(hideCardImage, 500);
       checkMatch();
       matchArray = [];
-      flipCard(e);
+      //   flipCard(e);
     }
   }
 
   function checkMatch() {
     const [firstCard, secondCard] = matchArray;
     if (firstCard.dataset.index == secondCard.dataset.index) {
-      matchArray.forEach(match => match.remove());
+      removeMatchedCards();
     }
+  }
+
+  function removeMatchedCards() {
+    const nodes = [];
+
+    matchArray.forEach(match =>
+      match.hasChildNodes() ? nodes.push(match.children) : null
+    );
+    nodes.forEach(node =>
+      Array.from(node).forEach(n => (n.style.display = 'none'))
+    );
   }
 });
