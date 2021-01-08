@@ -14,12 +14,13 @@ html {
 body {
   box-sizing: border-box;
   text-align: center;
+  position: relative;
 }
 
 h1 {
   font-size: 5rem;
   color: #614385;
-  margin: 2rem 0;
+  // margin: 2rem 0;
 }
 
 .cards {

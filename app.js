@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', e => {
     setTimer();
     // make sure that grid is empty
     hideCardImage();
-    shuffle(cards);
   }
   function hideCardImage() {
     cards.forEach(card => card.classList.remove('visible'));

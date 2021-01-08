@@ -3,24 +3,20 @@
 *::after {
   padding: 0;
   margin: 0;
-  box-sizing: inherit;
-}
+  box-sizing: inherit; }
 
 html {
   font-size: 62.5%;
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
 
 body {
   box-sizing: border-box;
   text-align: center;
-}
+  position: relative; }
 
 h1 {
   font-size: 5rem;
-  color: #614385;
-  margin: 2rem 0;
-}
+  color: #614385; }
 
 .cards {
   width: 80rem;
@@ -28,8 +24,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, auto);
   grid-gap: 5px;
-  margin: 2rem auto;
-}
+  margin: 2rem auto; }
 
 .card {
   width: 20rem;
@@ -37,37 +32,29 @@ h1 {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s;
-  border-radius: 5px;
-}
-.card__box {
-  width: 200px;
-  height: 100%;
-  perspective: 1000px;
-  position: relative;
-}
-.card__front,
-.card__back {
-  position: absolute;
-  backface-visibility: hidden;
-  border: 5px solid black;
-}
-.card__front {
-  background: linear-gradient(to right, #516395, #614385);
-  transform: rotateY(0deg);
-  z-index: 2;
-}
-.card__back {
-  background-color: wheat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: rotateY(180deg);
-}
+  border-radius: 5px; }
+  .card__box {
+    width: 200px;
+    height: 100%;
+    perspective: 1000px;
+    position: relative; }
+  .card__front, .card__back {
+    position: absolute;
+    backface-visibility: hidden;
+    border: 5px solid black; }
+  .card__front {
+    background: linear-gradient(to right, #516395, #614385);
+    transform: rotateY(0deg);
+    z-index: 2; }
+  .card__back {
+    background-color: wheat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg); }
 
 .card.visible > .card__box > .card__front {
-  transform: rotateY(180deg);
-}
+  transform: rotateY(180deg); }
 
 .card.visible > .card__box > .card__back {
-  transform: rotateY(0deg);
-}
+  transform: rotateY(0deg); }
