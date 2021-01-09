@@ -1,20 +1,107 @@
 document.addEventListener('DOMContentLoaded', e => {
   const startButton = document.querySelector('.start-button');
-  const restartButton = document.querySelector('.restart-button');
   const timer = document.querySelector('.seconds');
   const cardsBox = document.querySelector('.cards');
+  const cardsArray = [
+    {
+      index: 1,
+      src: 'images/chicken-nuggets.png',
+      title: 'Chicken nuggets'
+    },
+    {
+      index: 2,
+      src: 'images/donut.png',
+      title: 'Donut'
+    },
+    {
+      index: 3,
+      src: 'images/french-fries.png',
+      title: 'French fries'
+    },
+    {
+      index: 4,
+      src: 'images/hamburger.png',
+      title: 'Hamburger'
+    },
+    {
+      index: 5,
+      src: 'images/hot-dog.png',
+      title: 'Hot-dog'
+    },
+    {
+      index: 6,
+      src: 'images/ice-cream.png',
+      title: 'Ice cream'
+    },
+    {
+      index: 7,
+      src: 'images/pizza.png',
+      title: 'Pizza'
+    },
+    {
+      index: 8,
+      src: 'images/popcorn.png',
+      title: 'Popcorn'
+    },
+    {
+      index: 1,
+      src: 'images/chicken-nuggets.png',
+      title: 'Chicken nuggets'
+    },
+    {
+      index: 2,
+      src: 'images/donut.png',
+      title: 'Donut'
+    },
+    {
+      index: 3,
+      src: 'images/french-fries.png',
+      title: 'French fries'
+    },
+    {
+      index: 4,
+      src: 'images/hamburger.png',
+      title: 'Hamburger'
+    },
+    {
+      index: 5,
+      src: 'images/hot-dog.png',
+      title: 'Hot-dog'
+    },
+    {
+      index: 6,
+      src: 'images/ice-cream.png',
+      title: 'Ice cream'
+    },
+    {
+      index: 7,
+      src: 'images/pizza.png',
+      title: 'Pizza'
+    },
+    {
+      index: 8,
+      src: 'images/popcorn.png',
+      title: 'Popcorn'
+    }
+  ];
   let matchArray = [];
 
   //EVENT LISTENERS
   // flipping effect on all cards that are clicked
-
-  cardsBox.classList.add('not-clickable');
-
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => {
-    card.addEventListener('click', e => flipCard(e));
+  const cards = shuffle(cardsArray);
+  cards.forEach(({ index, src, title }) => {
+    const card = `<div class="card" data-index=${index}>
+        <div class="card__box">
+          <div class="card card__front"></div>
+          <div class="card card__back">
+            <img src=${src} alt=${title} />
+          </div>
+        </div>
+      </div>`;
+    cardsBox.insertAdjacentHTML('afterbegin', card);
   });
 
+  cardsBox.addEventListener('click', flipCard);
   startButton.addEventListener('click', e => {
     ///////////game should start
     init();
@@ -31,10 +118,11 @@ document.addEventListener('DOMContentLoaded', e => {
     hideCardImage();
 
     // make cards clickable
-    cardsBox.classList.remove('not-clickable');
   }
   function hideCardImage() {
-    cards.forEach(card => card.classList.remove('visible'));
+    Array.from(cardsBox.children).forEach(child =>
+      child.classList.remove('visible')
+    );
   }
 
   function setTimer() {
@@ -79,5 +167,23 @@ document.addEventListener('DOMContentLoaded', e => {
     nodes.forEach(node =>
       Array.from(node).forEach(n => (n.style.display = 'none'))
     );
+  }
+
+  function shuffle(array) {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
   }
 });
