@@ -2,10 +2,14 @@ document.addEventListener('DOMContentLoaded', e => {
   const startButton = document.querySelector('.start-button');
   const restartButton = document.querySelector('.restart-button');
   const timer = document.querySelector('.seconds');
+  const cardsBox = document.querySelector('.cards');
   let matchArray = [];
 
   //EVENT LISTENERS
   // flipping effect on all cards that are clicked
+
+  cardsBox.classList.add('not-clickable');
+
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.addEventListener('click', e => flipCard(e));
@@ -13,12 +17,8 @@ document.addEventListener('DOMContentLoaded', e => {
 
   startButton.addEventListener('click', e => {
     ///////////game should start
-    e.target.style.display = 'none';
     init();
   });
-
-  restartButton.addEventListener('click', init);
-
   // FUNCTIONS
 
   function init() {
@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', e => {
     setTimer();
     // make sure that grid is empty
     hideCardImage();
+
+    // make cards clickable
+    cardsBox.classList.remove('not-clickable');
   }
   function hideCardImage() {
     cards.forEach(card => card.classList.remove('visible'));
