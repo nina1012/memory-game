@@ -84,40 +84,48 @@ document.addEventListener('DOMContentLoaded', e => {
       title: 'Popcorn'
     }
   ];
+  const cards = shuffle(cardsArray);
+
   let matchArray = [];
+  let flips = document.querySelector('.flips');
 
   //EVENT LISTENERS
-  // flipping effect on all cards that are clicked
-  const cards = shuffle(cardsArray);
-  cards.forEach(({ index, src, title }) => {
-    const card = `<div class="card" data-index=${index}>
-        <div class="card__box">
-          <div class="card card__front"></div>
-          <div class="card card__back">
-            <img src=${src} alt=${title} />
-          </div>
-        </div>
-      </div>`;
-    cardsBox.insertAdjacentHTML('afterbegin', card);
-  });
+  // insertCards();
 
+  // flipping effect on all cards that are clicked
   cardsBox.addEventListener('click', flipCard);
   startButton.addEventListener('click', e => {
     ///////////game should start
     init();
   });
+
   // FUNCTIONS
 
   function init() {
     // timer should start to count
     timer.textContent = 0;
+    flips.textContent = 0;
     matchArray = [];
     startButton.display = 'inline-block';
     setTimer();
     // make sure that grid is empty
     hideCardImage();
+    insertCards();
+  }
 
-    // make cards clickable
+  // insert card at random index inside cardsBox
+  function insertCards() {
+    cards.forEach(({ index, src, title }) => {
+      const card = `<div class="card" data-index=${index}>
+          <div class="card__box">
+            <div class="card card__front"></div>
+            <div class="card card__back">
+              <img src=${src} alt=${title} />
+            </div>
+          </div>
+        </div>`;
+      cardsBox.insertAdjacentHTML('afterbegin', card);
+    });
   }
   function hideCardImage() {
     Array.from(cardsBox.children).forEach(child =>
@@ -133,7 +141,9 @@ document.addEventListener('DOMContentLoaded', e => {
   function flipCard(e) {
     // stops bubbling,just catches the first target
     e.stopImmediatePropagation();
+
     const card = e.target.parentNode.parentNode;
+
     card.classList.toggle('visible');
     // if matchArray length is less than 2,push card to that array
     if (matchArray.length < 2) {
@@ -147,6 +157,8 @@ document.addEventListener('DOMContentLoaded', e => {
         }, 400);
       }
     }
+    // increment the flips
+    flips.textContent++;
   }
 
   function checkMatch() {
@@ -165,7 +177,11 @@ document.addEventListener('DOMContentLoaded', e => {
     );
     // add display:none to every node beneath the card-match
     nodes.forEach(node =>
-      Array.from(node).forEach(n => (n.style.display = 'none'))
+      Array.from(node).forEach((n, i) => {
+        n.style.display = 'none';
+
+        // const food = n.children[1].children[0].alt;
+      })
     );
   }
 
