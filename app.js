@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', e => {
     }
   ];
   const cards = shuffle(cardsArray);
+  let numberOfCards = cards.length;
 
   let matchArray = [];
   let flips = document.querySelector('.flips');
@@ -106,7 +107,6 @@ document.addEventListener('DOMContentLoaded', e => {
     timer.textContent = 0;
     flips.textContent = 0;
     matchArray = [];
-    startButton.display = 'inline-block';
     setTimer();
     // make sure that grid is empty
     hideCardImage();
@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', e => {
 
   // insert card at random index inside cardsBox
   function insertCards() {
+    cardsBox.innerHTML = '';
     cards.forEach(({ index, src, title }) => {
       const card = `<div class="card" data-index=${index}>
           <div class="card__box">
@@ -141,7 +142,6 @@ document.addEventListener('DOMContentLoaded', e => {
   function flipCard(e) {
     // stops bubbling,just catches the first target
     e.stopImmediatePropagation();
-
     const card = e.target.parentNode.parentNode;
 
     card.classList.toggle('visible');
@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', e => {
         setTimeout(() => {
           checkMatch();
           matchArray = [];
+          isEnd();
           setTimeout(hideCardImage, 500);
         }, 400);
       }
@@ -165,6 +166,8 @@ document.addEventListener('DOMContentLoaded', e => {
     const [firstCard, secondCard] = matchArray;
     if (firstCard.dataset.index == secondCard.dataset.index) {
       removeMatchedCards();
+      // for each match, decrease number by 2
+      numberOfCards -= 2;
     }
   }
 
@@ -179,8 +182,6 @@ document.addEventListener('DOMContentLoaded', e => {
     nodes.forEach(node =>
       Array.from(node).forEach((n, i) => {
         n.style.display = 'none';
-
-        // const food = n.children[1].children[0].alt;
       })
     );
   }
@@ -201,5 +202,12 @@ document.addEventListener('DOMContentLoaded', e => {
       array[randomIndex] = temporaryValue;
     }
     return array;
+  }
+
+  function isEnd() {
+    if (numberOfCards == 0) {
+      alert(`You win!
+      Number of flips ${flips.innerHTML}, ${timer.innerHTML} seconds`);
+    }
   }
 });
